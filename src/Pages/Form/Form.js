@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 
 const Form = () => {
+
+
+    const [] = useReducer()
+
     const submitData = (event) => {
         event.preventDefault()
     }
@@ -20,6 +24,15 @@ const Form = () => {
                 <div className="mb-6">
                     <label for="repeat-password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Repeat password</label>
                     <input type="password" id="repeat-password" name='confirmPassword' className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required />
+                </div>
+                <div className="mb-6">
+                    <button
+
+                        className='bg-gradient-to-r from-blue-500 to-violet-400 px-5 py-2 m-4 ml-0 rounded-md text-white'>-</button>
+                    <span className='text-2xl'>Count: 0</span>
+                    <button
+
+                        className='bg-gradient-to-r from-red-500 to-pink-400 px-5 py-2 m-4 rounded-md text-white'>+</button>
                 </div>
                 <div className="flex items-start mb-6">
                     <div className="flex items-center h-5">
