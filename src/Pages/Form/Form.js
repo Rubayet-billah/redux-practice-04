@@ -5,7 +5,7 @@ const Form = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    term: true,
+    term: false,
   };
 
   const reducer = (state, action) => {
@@ -15,6 +15,11 @@ const Form = () => {
         return {
           ...state,
           [action.payload.name]: action.payload.value,
+        };
+      case "TERMS":
+        return {
+          ...state,
+          term: !state.term,
         };
 
       default:
@@ -64,6 +69,12 @@ const Form = () => {
             type="password"
             id="password"
             name="password"
+            onBlur={(e) => {
+              dispatch({
+                type: "INPUT",
+                payload: { name: e.target.name, value: e.target.value },
+              });
+            }}
             className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
             required
           />
@@ -79,6 +90,12 @@ const Form = () => {
             type="password"
             id="repeat-password"
             name="confirmPassword"
+            onBlur={(e) => {
+              dispatch({
+                type: "INPUT",
+                payload: { name: e.target.name, value: e.target.value },
+              });
+            }}
             className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
             required
           />
@@ -98,7 +115,12 @@ const Form = () => {
               id="terms"
               type="checkbox"
               value=""
-              name="terms"
+              name="term"
+              onClick={(e) => {
+                dispatch({
+                  type: "TERMS",
+                });
+              }}
               className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
               required
             />
@@ -118,7 +140,10 @@ const Form = () => {
         </div>
         <button
           type="submit"
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          className={`text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ${
+            !state.term && "bg-gray-500"
+          }`}
+          disabled={!state.term}
         >
           Register new account
         </button>
